@@ -3,11 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>Name</key>
-	<string>Getting Started</string>
-	<key>Pages</key>
-	<array>
-		<string>Introduction.playgroundpage</string>
-		<string>Custom.playgroundpage</string>
-	</array>
+	<string>Display a Text Message</string>
+	<key>LiveViewMode</key>
+	<string>VisibleByDefault</string>
+	<key>LiveViewEdgeToEdge</key>
+	<true/>
+	<key>PlaygroundLoggingMode</key>
+	<string>Normal</string>
 </dict>
 </plist>
