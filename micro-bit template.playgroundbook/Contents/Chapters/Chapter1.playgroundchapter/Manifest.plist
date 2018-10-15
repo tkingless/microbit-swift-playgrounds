@@ -6,7 +6,7 @@
 	<string>Getting Started</string>
 	<key>Pages</key>
 	<array>
-		<string>Page1.playgroundpage</string>
+		<string>Introduction.playgroundpage</string>
 	</array>
 </dict>
 </plist>
