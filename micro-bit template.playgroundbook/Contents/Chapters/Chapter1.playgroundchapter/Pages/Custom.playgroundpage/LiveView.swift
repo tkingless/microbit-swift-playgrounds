@@ -8,5 +8,5 @@ import PlaygroundSupport
 import UIKit
 
 let page = PlaygroundPage.current
-let liveViewContainerController = LiveViewContainerController.controllerFromStoryboard("LiveView")
-page.liveView = liveViewContainerController
+let dartboardCtlr = DartboardViewController.controllerFromStoryboard("Dartboard")
+page.liveView = dartboardCtlr
