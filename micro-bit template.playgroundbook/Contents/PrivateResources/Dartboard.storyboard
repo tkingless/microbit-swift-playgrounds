@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Egd-qw-ZCR">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Egd-qw-ZCR" customClass="GradientView">
                                 <rect key="frame" x="0.0" y="-62.5" width="667" height="500"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="console" translatesAutoresizingMaskIntoConstraints="NO" id="f4t-TM-Eus">
@@ -31,19 +31,37 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="wxJ-fc-eVi" secondAttribute="height" multiplier="3:2" id="ayL-sW-R5b"/>
                                         </constraints>
-                                        <state key="normal" image="left"/>
+                                        <state key="normal" image="leftBtn"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7o-C6-QKI" userLabel="btn_right">
+                                        <rect key="frame" x="150" y="132.5" width="50" height="34.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="V7o-C6-QKI" secondAttribute="height" multiplier="29:20" id="RB0-hF-von"/>
+                                        </constraints>
+                                        <state key="normal" image="rightBtn"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.81621461449140742" blue="0.091943487681235059" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.2829485313404696" green="0.28366053588499274" blue="0.27122358998748564" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="wxJ-fc-eVi" firstAttribute="top" secondItem="f4t-TM-Eus" secondAttribute="centerY" multiplier="0.52" id="DgO-z1-auZ"/>
                                     <constraint firstAttribute="width" secondItem="Egd-qw-ZCR" secondAttribute="height" multiplier="4:3" id="L04-7L-ri2"/>
+                                    <constraint firstItem="V7o-C6-QKI" firstAttribute="top" secondItem="f4t-TM-Eus" secondAttribute="centerY" multiplier="0.53" id="L1G-yZ-45n"/>
                                     <constraint firstItem="f4t-TM-Eus" firstAttribute="width" secondItem="Egd-qw-ZCR" secondAttribute="width" id="RfM-AW-QWd"/>
                                     <constraint firstItem="wxJ-fc-eVi" firstAttribute="width" secondItem="f4t-TM-Eus" secondAttribute="width" multiplier="0.075" id="SY1-G8-Yla"/>
                                     <constraint firstItem="wxJ-fc-eVi" firstAttribute="leading" secondItem="f4t-TM-Eus" secondAttribute="centerX" multiplier="0.22" id="WXZ-aZ-z9E"/>
                                     <constraint firstItem="f4t-TM-Eus" firstAttribute="centerX" secondItem="Egd-qw-ZCR" secondAttribute="centerX" id="eCO-PP-OLU"/>
                                     <constraint firstItem="f4t-TM-Eus" firstAttribute="centerY" secondItem="Egd-qw-ZCR" secondAttribute="centerY" id="iwn-EF-Jh0"/>
+                                    <constraint firstItem="V7o-C6-QKI" firstAttribute="width" secondItem="f4t-TM-Eus" secondAttribute="width" multiplier="0.075" id="mdb-7F-vQS"/>
+                                    <constraint firstItem="V7o-C6-QKI" firstAttribute="leading" secondItem="f4t-TM-Eus" secondAttribute="centerX" multiplier="0.45" id="yQ3-eP-Ddy"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="1" green="0.87921994810000004" blue="0.31291642660000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -62,6 +80,7 @@
     </scenes>
     <resources>
         <image name="console" width="1500" height="814"/>
-        <image name="left" width="239" height="166"/>
+        <image name="leftBtn" width="239" height="166"/>
+        <image name="rightBtn" width="290" height="200"/>
     </resources>
 </document>
