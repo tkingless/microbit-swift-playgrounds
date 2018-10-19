@@ -21,4 +21,5 @@ import PlaygroundSupport
 
 //#-end-hidden-code
 let textToDisplay = /*#-editable-code text to display*/"Hello World!"/*#-end-editable-code*/
-showString(textToDisplay)
+//showString(textToDisplay)
+uartWriteData(textToDisplay)
