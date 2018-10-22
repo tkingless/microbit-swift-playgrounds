@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Egd-qw-ZCR" customClass="GradientView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Egd-qw-ZCR">
                                 <rect key="frame" x="0.0" y="-62.5" width="667" height="500"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="console" translatesAutoresizingMaskIntoConstraints="NO" id="f4t-TM-Eus">
@@ -63,15 +63,28 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oJx-qI-mgE">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                                <color key="textColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="5mP-4z-7xF" firstAttribute="bottom" secondItem="oJx-qI-mgE" secondAttribute="bottom" id="7YV-fh-4xA"/>
+                            <constraint firstItem="oJx-qI-mgE" firstAttribute="top" secondItem="5mP-4z-7xF" secondAttribute="top" id="IaS-Uh-yMs"/>
                             <constraint firstItem="Egd-qw-ZCR" firstAttribute="centerX" secondItem="5mP-4z-7xF" secondAttribute="centerX" id="O3i-UA-KUD"/>
+                            <constraint firstItem="5mP-4z-7xF" firstAttribute="trailing" secondItem="oJx-qI-mgE" secondAttribute="trailing" id="dCi-vf-j29"/>
                             <constraint firstItem="Egd-qw-ZCR" firstAttribute="centerY" secondItem="5mP-4z-7xF" secondAttribute="centerY" id="fek-oq-dB6"/>
                             <constraint firstItem="Egd-qw-ZCR" firstAttribute="width" secondItem="WNf-S8-qKg" secondAttribute="width" id="q4R-a5-M0c"/>
+                            <constraint firstItem="oJx-qI-mgE" firstAttribute="leading" secondItem="5mP-4z-7xF" secondAttribute="leading" id="xDS-0i-T79"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5mP-4z-7xF"/>
                     </view>
+                    <connections>
+                        <outlet property="logTextView" destination="oJx-qI-mgE" id="jig-i1-5gU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pws-0U-slW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
