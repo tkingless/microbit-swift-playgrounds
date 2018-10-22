@@ -25,6 +25,7 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
         self.logMessage("Success")
         self.btManager = BTManager()
         if self.btManager != nil {
@@ -39,18 +40,18 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
         super.viewWillAppear(animated)
         
         if let devicesMappingDict = self.btManager.pairedDeviceMappings {
-//            bluetoothController?.view.isHidden = devicesMappingDict.count == 0
+            bluetoothController?.view.isHidden = devicesMappingDict.count == 0
             self.logMessage("devicesMappingDict.count is \(devicesMappingDict.count)")
             if self.btManager.microbit == nil {
                 _ = self.btManager.bluetoothCentralManager.connectToLastConnectedPeripheral(timeout: 7.0,
                                                                                             callback: {(peripheral: CBPeripheral?, error: Error?) in
-//                                                                                                // TODO: - Handle the error here - although unlikely
+                                                                                                //                                                                                                // TODO: - Handle the error here - although unlikely
                 })
             }
             
         } else {
-//            bluetoothController?.view.isHidden = true
-             self.logMessage("devicesMappingDict is nil")
+            bluetoothController?.view.isHidden = true
+            self.logMessage("devicesMappingDict is nil")
         }
         
     }
@@ -75,21 +76,21 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     
     public func btManagerStateDidChange(_ manager: BTManager) {
         
-        //        if (manager.bluetoothCentralManager.state == .poweredOn) {
-        //            self.logMessage("Central manager changed state to 'poweredOn'")
-        //
-        //            self.bluetoothController = BluetoothConnectionViewController(bluetoothManager: self.btManager)
-        //            self.bluetoothController.messageLogger = self
-        //            if let connectionView = bluetoothController.view {
-        //                self.view.addSubview(connectionView)
-        //                connectionView.translatesAutoresizingMaskIntoConstraints = false
-        //                NSLayoutConstraint.activate([
-        //                    connectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 12.0),
-        //                    connectionView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: 0.0),
-        //                    connectionView.widthAnchor.constraint(greaterThanOrEqualToConstant: 270.0)
-        //                    ])
-        //            }
-        //        }
+        if (manager.bluetoothCentralManager.state == .poweredOn) {
+            self.logMessage("Central manager changed state to 'poweredOn'")
+            
+            self.bluetoothController = BluetoothConnectionViewController(bluetoothManager: self.btManager)
+            self.bluetoothController.messageLogger = self
+            if let connectionView = bluetoothController.view {
+                self.view.addSubview(connectionView)
+                connectionView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    connectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 12.0),
+                    connectionView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: 0.0),
+                    connectionView.widthAnchor.constraint(greaterThanOrEqualToConstant: 270.0)
+                    ])
+            }
+        }
     }
     
     public func btManager(_ manager: BTManager,
@@ -99,7 +100,7 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
         //        self.containerViewController.send(message)
         
         //        self.pairButton.isHidden = true
-        //        self.bluetoothController.view.isHidden = false
+        self.bluetoothController.view.isHidden = false
         //
         //        self.microbitMimic.isActive = false
         
@@ -194,13 +195,13 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
                           didPairToMicrobit microbit: BTMicrobit?,
                           error: BTManager.PairingError?) {
         
-        //        if let peripheral = microbit?.peripheral, let microbitName = self.btManager.microbitNameForPeripheral(peripheral) {
-        //
-        //            // Ensure peripheral is renamed after pairing
-        //            if let btConnectionView = bluetoothController.view as? PlaygroundBluetoothConnectionView {
-        //                btConnectionView.setName(microbitName, forPeripheral: peripheral)
-        //            }
-        //        }
+        if let peripheral = microbit?.peripheral, let microbitName = self.btManager.microbitNameForPeripheral(peripheral) {
+            
+            // Ensure peripheral is renamed after pairing
+            if let btConnectionView = bluetoothController.view as? PlaygroundBluetoothConnectionView {
+                btConnectionView.setName(microbitName, forPeripheral: peripheral)
+            }
+        }
     }
 }
 
