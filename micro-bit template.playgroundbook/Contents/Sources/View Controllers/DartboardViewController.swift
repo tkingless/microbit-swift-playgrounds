@@ -26,6 +26,18 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        if let log = self.logTextView {
+            //self.liveViewController.logMessage("view did load safe area: \(self.liveViewSafeAreaGuide)")
+            log.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                log.topAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.topAnchor, constant: 0.0),
+                log.leadingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.leadingAnchor, constant: 0.0),
+                log.trailingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.trailingAnchor, constant: 0.0),
+                log.bottomAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.bottomAnchor, constant: 0.0)
+                ])
+        }
+        self.logTextView.isHidden = true
+
         self.logMessage("Success")
         self.btManager = BTManager()
         if self.btManager != nil {
@@ -45,7 +57,7 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
             if self.btManager.microbit == nil {
                 _ = self.btManager.bluetoothCentralManager.connectToLastConnectedPeripheral(timeout: 7.0,
                                                                                             callback: {(peripheral: CBPeripheral?, error: Error?) in
-                                                                                                //                                                                                                // TODO: - Handle the error here - although unlikely
+                                                                                                // TODO: - Handle the error here - although unlikely
                 })
             }
             
@@ -82,11 +94,12 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
             self.bluetoothController = BluetoothConnectionViewController(bluetoothManager: self.btManager)
             self.bluetoothController.messageLogger = self
             if let connectionView = bluetoothController.view {
+                let safeAreaGuide = self.liveViewSafeAreaGuide
                 self.view.addSubview(connectionView)
                 connectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    connectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 12.0),
-                    connectionView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: 0.0),
+                    connectionView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 12.0),
+                    connectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: 0.0),
                     connectionView.widthAnchor.constraint(greaterThanOrEqualToConstant: 270.0)
                     ])
             }
