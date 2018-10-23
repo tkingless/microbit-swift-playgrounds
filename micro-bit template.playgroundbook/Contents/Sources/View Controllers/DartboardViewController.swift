@@ -111,77 +111,12 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     
     public func btManager(_ manager: BTManager,
                           didConnectMicrobit microbit: BTMicrobit) {
-        
-        let message = PlaygroundValue.fromActionType(.connectionChanged)
-        //        self.containerViewController.send(message)
-        
-        //        self.pairButton.isHidden = true
         self.bluetoothController.view.isHidden = false
-        //
-        //        self.microbitMimic.isActive = false
-        
-        //        var characteristicUUID: BTMicrobit.CharacteristicUUID?
-        //        // Get the microbit image and cache it.
-        //        characteristicUUID = .ledStateUUID
-        //        microbit.readValueForCharacteristic(characteristicUUID!,
-        //                                            handler: {(characteristic: CBCharacteristic, error: Error?) in
-        //
-        //                                                if let data = characteristic.value {
-        //                                                    //self.logMessage("I got image: \(data as! NSData)")
-        //                                                    self.microbitMimic.microbitImage = MicrobitImage(data)
-        //                                                }
-        //        })
-        //
-        //        characteristicUUID = .ledScrollingDelayUUID
-        //        microbit.readValueForCharacteristic(characteristicUUID!,
-        //                                            handler: {(characteristic: CBCharacteristic, error: Error?) in
-        //
-        //                                                if let data = characteristic.value {
-        //                                                    if let scrollingDelay = data.integerFromLittleUInt16 {
-        //                                                        //self.logMessage("Default scrolling delay: \(scrollingDelay)")
-        //                                                        self.microbitMimic.scrollingDelay = scrollingDelay
-        //                                                    }
-        //                                                }
-        //        })
-        //
-        //        characteristicUUID = .buttonStateAUUID
-        //        microbit.setNotifyValue(true,
-        //                                forCharacteristicUUID: characteristicUUID!,
-        //                                handler: {(characteristic: CBCharacteristic, error: Error?) in
-        //                                    if let data = characteristic.value {
-        //                                        let buttonState = BTMicrobit.ButtonState(data) ?? BTMicrobit.ButtonState.notPressed
-        //                                        self.microbitMimic.showButtonAPressed(buttonState != .notPressed)
-        //                                        return .continueNotifications
-        //                                    }
-        //                                    return .stopNotifications
-        //        })
-        //
-        //        characteristicUUID = .buttonStateBUUID
-        //        microbit.setNotifyValue(true,
-        //                                forCharacteristicUUID: characteristicUUID!,
-        //                                handler: {(characteristic: CBCharacteristic, error: Error?) in
-        //                                    if let data = characteristic.value {
-        //                                        let buttonState = BTMicrobit.ButtonState(data) ?? BTMicrobit.ButtonState.notPressed
-        //                                        self.microbitMimic.showButtonBPressed(buttonState != .notPressed)
-        //                                        return .continueNotifications
-        //                                    }
-        //                                    return .stopNotifications
-        //        })
-        //
-        //        self.setupValuesTable()
     }
     
     public func btManager(_ manager: BTManager,
                           didDisconnectMicrobit microbit: BTMicrobit?,
                           error: Error?) {
-        
-        let message = PlaygroundValue.fromActionType(.connectionChanged)
-        //        self.containerViewController.send(message)
-        //
-        //        self.pairButton.isHidden = false
-        //        self.microbitMimic.resetInterface()
-        //        self.microbitMimic.isActive = true
-        //        self.setupValuesTable()
     }
     
     public func btManager(_ manager: BTManager,
@@ -196,9 +131,6 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
                 manager.pairedDeviceMappings = devicesMappingDict
             }
         }
-        
-        //        self.pairButton.isHidden = false
-        //        self.microbitMimic.isActive = true
     }
     
     // This delegate is not called if the array is empty - there is at least one missing service.
@@ -248,22 +180,12 @@ extension DartboardViewController: PlaygroundLiveViewMessageHandler {
                 })
                 receivingEvents = true
             }
-        } else {
-//            self.liveViewController.microbitMimic.isActive = true
-//            self.liveViewController.microbitMimic.delegate = self
         }
-        
-        // The connection is open and the ContentMessenger needs to have it's cached image set.
-//        let returnedMessage = PlaygroundValue.fromActionType(.readData,
-//                                                             characteristicUUID: .ledStateUUID,
-//                                                             data: self.liveViewController.cachedMicrobitImage.imageData)
-//        self.send(returnedMessage)
     }
     
     public func liveViewMessageConnectionClosed() {
         
         self.proxyConnectionIsOpen = false
-//        self.liveViewController.microbitMimic.delegate = nil
         //self.liveViewController.logMessage("liveViewMessageConnectionClosed")
         // We need to stop receiving events otherwise they appear more than once when re-running content code.
         // We do not however clear the micro:bit's handlers when the connection closes as
@@ -276,9 +198,6 @@ extension DartboardViewController: PlaygroundLiveViewMessageHandler {
     
     public func receive(_ message: PlaygroundValue) {
         
-        //let liveViewController = self.liveViewController
-        //liveViewController.logMessage("Received message: \(message)")
-        
         if let actionType = message.actionType {
             
             let microbit = self.btManager.microbit
@@ -287,16 +206,7 @@ extension DartboardViewController: PlaygroundLiveViewMessageHandler {
                 
             case .readData:
                 guard let characteristicUUID = message.characteristicUUID else { return }
-                switch characteristicUUID {
-                    
-                case .ledStateUUID:
-//                    let returnedMessage = PlaygroundValue.fromActionType(actionType,
-//                                                                         characteristicUUID: characteristicUUID,
-//                                                                         data: self.liveViewController.cachedMicrobitImage.imageData)
-//                    self.send(returnedMessage)
-                    break
-                    
-                default:
+
                     microbit?.readValueForCharacteristic(characteristicUUID,
                                                          handler: {(characteristic, error) in
                                                             let returnedMessage = PlaygroundValue.fromActionType(actionType,
@@ -305,37 +215,12 @@ extension DartboardViewController: PlaygroundLiveViewMessageHandler {
                                                             //liveViewController.logMessage("Received data: \(characteristic.value as! NSData)")
                                                             self.send(returnedMessage)
                     })
-                    break;
-                }
+
                 
             case .writeData:
                 guard let characteristicUUID = message.characteristicUUID else { return }
                 if let data = message.data {
                     
-                    switch characteristicUUID {
-                        
-                    case .ledStateUUID:
-//                        self.liveViewController.cachedMicrobitImage = MicrobitImage(data)
-                        break
-                    case .ledTextUUID:
-//                        if let text = String(data: data, encoding: .utf8) {
-//                            self.liveViewController.microbitMimic.scrollText(text)
-//                        }
-                        break
-                    case .ledScrollingDelayUUID:
-//                        if let scrollingDelay = data.integerFromLittleUInt16 {
-//                            self.liveViewController.microbitMimic.scrollingDelay = scrollingDelay
-//                        }
-                        break
-                    case .accelerometerPeriodUUID:
-//                        if let accelerometerPeriod = data.integerFromLittleUInt16,
-//                            let period = BTMicrobit.AccelerometerPeriod(rawValue: accelerometerPeriod) {
-//                            self.liveViewController.microbitMimic.accelerometerPeriod = period
-//                        }
-                        break
-                    default:
-                        break
-                    }
                     microbit?.writeValue(data,
                                          forCharacteristicUUID: characteristicUUID,
                                          handler: {(characteristic, error) in
@@ -351,57 +236,12 @@ extension DartboardViewController: PlaygroundLiveViewMessageHandler {
                 microbit?.setNotifyValue(true,
                                          forCharacteristicUUID: characteristicUUID,
                                          handler: notificationsHandler)
-                
-                switch characteristicUUID {
-                    
-                case .accelerometerDataUUID:
-//                    self.liveViewController.microbitMimic.addAccelerometerHandler({ accelerometerValues in
-//                        
-//                        let returnedMessage = PlaygroundValue.fromActionType(.startNotifications,
-//                                                                             characteristicUUID: .accelerometerDataUUID,
-//                                                                             data: accelerometerValues.microbitData)
-//                        self.send(returnedMessage)
-//                        return self.proxyConnectionIsOpen ? .continueNotifications : .stopNotifications
-//                    })
-                    break
-                default:
-                    break
-                }
                 break
                 
             case .stopNotifications:
                 break
-                
-            case .requestEvent:
-                if let data = message.data, let event = BTMicrobit.Event(data) {
-                    
-                    //liveViewController.logMessage("Data: + \(data as! NSData)")
-                    // Start the mimic's accelerometer for non-shake gestures to enable events to be sent.
-                    if case let .gesture(_, gesture) = event {
-//                        if gesture != .shake {
-//                            self.liveViewController.microbitMimic.addAccelerometerHandler({ accelerometerValues in
-//                                return self.proxyConnectionIsOpen ? .continueNotifications : .stopNotifications
-//                            })
-//                        }
-                    }
-                    
-                    microbit?.addEvent(event, handler: {(characteristic, error) in
-                        //liveViewController.logMessage("Added event: + \(event)")
-                    })
-                }
-                
-            case .removeEvent:
-                break
-                
-            case .connectionChanged:
-                break
-                
-            case .shareData:
-//                if let data = message.data, let uti = message.uti {
-//                    liveViewController.dataActivityItem = DataActivityItemSource(data: data, uti: uti)
-//                } else {
-//                    liveViewController.dataActivityItem = nil
-//                }
+            
+            default:
                 break
             }
         }
