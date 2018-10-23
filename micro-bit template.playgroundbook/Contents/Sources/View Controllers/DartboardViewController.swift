@@ -29,17 +29,17 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        if let log = self.logTextView {
-            //self.liveViewController.logMessage("view did load safe area: \(self.liveViewSafeAreaGuide)")
-            log.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                log.topAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.topAnchor, constant: 0.0),
-                log.leadingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.leadingAnchor, constant: 0.0),
-                log.trailingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.trailingAnchor, constant: 0.0),
-                log.bottomAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.bottomAnchor, constant: 0.0)
-                ])
-        }
-        self.logTextView.isHidden = true
+//        if let log = self.logTextView {
+//            //self.liveViewController.logMessage("view did load safe area: \(self.liveViewSafeAreaGuide)")
+//            log.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([
+//                log.topAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.topAnchor, constant: 0.0),
+//                log.leadingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.leadingAnchor, constant: 0.0),
+//                log.trailingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.trailingAnchor, constant: 0.0),
+//                log.bottomAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.bottomAnchor, constant: 0.0)
+//                ])
+//        }
+        self.logTextView.isHidden = false
 
         self.logMessage("Success")
         self.btManager = BTManager()
@@ -79,6 +79,26 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
         let controller = storyboard.instantiateInitialViewController() as! DartboardViewController
         
         return controller
+    }
+    
+    @IBAction func OnBtnLeftClicked (_ sender: UIButton) {
+        let delimitedText =  "L."
+        if let microbit = self.btManager.microbit {
+            microbit.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
+                                 handler: {(characteristic, error) in
+                                    self.logMessage("error happened")
+            })
+        }
+    }
+    
+    @IBAction func OnBtnRightClicked (_ sender: UIButton) {
+        let delimitedText =  "R."
+        if let microbit = self.btManager.microbit {
+            microbit.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
+                                handler: {(characteristic, error) in
+                                    self.logMessage("error happened")
+            })
+        }
     }
     
     //MARK: - BTManagerDelegate
