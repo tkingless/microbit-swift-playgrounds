@@ -89,6 +89,10 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
                                     self.logMessage("error happened")
             })
         }
+        //self.btManager.microbit!.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
+                                            handler: {(characteristic, error) in
+                                                self.logMessage("error happened")
+        })
     }
     
     @IBAction func OnBtnRightClicked (_ sender: UIButton) {
