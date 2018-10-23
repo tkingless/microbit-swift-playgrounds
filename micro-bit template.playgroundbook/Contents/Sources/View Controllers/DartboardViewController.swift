@@ -29,18 +29,8 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-//        if let log = self.logTextView {
-//            //self.liveViewController.logMessage("view did load safe area: \(self.liveViewSafeAreaGuide)")
-//            log.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([
-//                log.topAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.topAnchor, constant: 0.0),
-//                log.leadingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.leadingAnchor, constant: 0.0),
-//                log.trailingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.trailingAnchor, constant: 0.0),
-//                log.bottomAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.bottomAnchor, constant: 0.0)
-//                ])
-//        }
         self.logTextView.isHidden = false
-
+        
         self.logMessage("Success")
         self.btManager = BTManager()
         if self.btManager != nil {
@@ -85,13 +75,13 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
         let delimitedText =  "L."
         if let microbit = self.btManager.microbit {
             microbit.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
-                                 handler: {(characteristic, error) in
+                                handler: {(characteristic, error) in
                                     self.logMessage("error happened")
             })
         }
         //self.btManager.microbit!.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
-                                            handler: {(characteristic, error) in
-                                                self.logMessage("error happened")
+        handler: {(characteristic, error) in
+            self.logMessage("error happened")
         })
     }
     
@@ -230,16 +220,16 @@ extension DartboardViewController: PlaygroundLiveViewMessageHandler {
                 
             case .readData:
                 guard let characteristicUUID = message.characteristicUUID else { return }
-
-                    microbit?.readValueForCharacteristic(characteristicUUID,
-                                                         handler: {(characteristic, error) in
-                                                            let returnedMessage = PlaygroundValue.fromActionType(actionType,
-                                                                                                                 characteristicUUID: characteristicUUID,
-                                                                                                                 data: characteristic.value)
-                                                            //liveViewController.logMessage("Received data: \(characteristic.value as! NSData)")
-                                                            self.send(returnedMessage)
-                    })
-
+                
+                microbit?.readValueForCharacteristic(characteristicUUID,
+                                                     handler: {(characteristic, error) in
+                                                        let returnedMessage = PlaygroundValue.fromActionType(actionType,
+                                                                                                             characteristicUUID: characteristicUUID,
+                                                                                                             data: characteristic.value)
+                                                        //liveViewController.logMessage("Received data: \(characteristic.value as! NSData)")
+                                                        self.send(returnedMessage)
+                })
+                
                 
             case .writeData:
                 guard let characteristicUUID = message.characteristicUUID else { return }
@@ -264,7 +254,7 @@ extension DartboardViewController: PlaygroundLiveViewMessageHandler {
                 
             case .stopNotifications:
                 break
-            
+                
             default:
                 break
             }
