@@ -73,13 +73,8 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     
     @IBAction func OnBtnLeftClicked (_ sender: UIButton) {
         let delimitedText =  "L."
-        if let microbit = self.btManager.microbit {
-            microbit.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
-                                handler: {(characteristic, error) in
-                                    self.logMessage("error happened")
-            })
-        }
-        //self.btManager.microbit!.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
+
+        self.btManager.microbit?.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
         handler: {(characteristic, error) in
             self.logMessage("error happened")
         })
@@ -87,6 +82,7 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
     
     @IBAction func OnBtnRightClicked (_ sender: UIButton) {
         let delimitedText =  "R."
+        
         if let microbit = self.btManager.microbit {
             microbit.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
                                 handler: {(characteristic, error) in
