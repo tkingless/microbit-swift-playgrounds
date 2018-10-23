@@ -46,12 +46,25 @@
                                             <action selector="OnBtnRightClicked:" destination="YRd-I1-xEs" eventType="touchUpInside" id="gSU-pM-sJg"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euJ-Yk-ZWi" userLabel="btn_down">
+                                        <rect key="frame" x="63" y="87" width="20.5" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="euJ-Yk-ZWi" secondAttribute="height" multiplier="211:213" id="RDM-pN-MbC"/>
+                                        </constraints>
+                                        <state key="normal" image="downBtn"/>
+                                        <connections>
+                                            <action selector="OnBtnDownClickced:" destination="YRd-I1-xEs" eventType="touchUpInside" id="K5e-ch-Hls"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.2829485313404696" green="0.28366053588499274" blue="0.27122358998748564" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="wxJ-fc-eVi" firstAttribute="top" secondItem="f4t-TM-Eus" secondAttribute="centerY" multiplier="0.52" id="DgO-z1-auZ"/>
                                     <constraint firstAttribute="width" secondItem="Egd-qw-ZCR" secondAttribute="height" multiplier="4:3" id="L04-7L-ri2"/>
                                     <constraint firstItem="V7o-C6-QKI" firstAttribute="top" secondItem="f4t-TM-Eus" secondAttribute="centerY" multiplier="0.53" id="L1G-yZ-45n"/>
+                                    <constraint firstItem="euJ-Yk-ZWi" firstAttribute="leading" secondItem="f4t-TM-Eus" secondAttribute="centerX" multiplier="0.336" id="LaZ-lD-CbG"/>
+                                    <constraint firstItem="euJ-Yk-ZWi" firstAttribute="width" secondItem="f4t-TM-Eus" secondAttribute="width" multiplier="0.055" id="NTg-Yz-Bf8"/>
+                                    <constraint firstItem="euJ-Yk-ZWi" firstAttribute="top" secondItem="f4t-TM-Eus" secondAttribute="centerY" multiplier="0.62" id="QPb-Go-9tx"/>
                                     <constraint firstItem="f4t-TM-Eus" firstAttribute="width" secondItem="Egd-qw-ZCR" secondAttribute="width" id="RfM-AW-QWd"/>
                                     <constraint firstItem="wxJ-fc-eVi" firstAttribute="width" secondItem="f4t-TM-Eus" secondAttribute="width" multiplier="0.075" id="SY1-G8-Yla"/>
                                     <constraint firstItem="wxJ-fc-eVi" firstAttribute="leading" secondItem="f4t-TM-Eus" secondAttribute="centerX" multiplier="0.22" id="WXZ-aZ-z9E"/>
@@ -100,6 +113,7 @@
     </scenes>
     <resources>
         <image name="console" width="1500" height="814"/>
+        <image name="downBtn" width="211" height="213"/>
         <image name="leftBtn" width="239" height="166"/>
         <image name="rightBtn" width="290" height="200"/>
     </resources>

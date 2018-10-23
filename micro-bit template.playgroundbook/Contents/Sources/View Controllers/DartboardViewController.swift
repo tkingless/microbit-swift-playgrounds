@@ -76,7 +76,6 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
 
         self.btManager.microbit?.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
         handler: {(characteristic, error) in
-            self.logMessage("error happened")
         })
     }
     
@@ -86,9 +85,16 @@ public class DartboardViewController : UIViewController, PlaygroundLiveViewSafeA
         if let microbit = self.btManager.microbit {
             microbit.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
                                 handler: {(characteristic, error) in
-                                    self.logMessage("error happened")
             })
         }
+    }
+    
+    @IBAction func OnBtnDownClickced (_ sender: UIButton) {
+        let delimitedText = "S."
+        
+        self.btManager.microbit?.writeValue(delimitedText.microbitData, forCharacteristicUUID: .uartRX,
+                                            handler: {(characteristic, error) in
+        })
     }
     
     //MARK: - BTManagerDelegate
