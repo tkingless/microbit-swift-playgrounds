@@ -82,6 +82,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G62-ZH-s2E"/>
                     </view>
+                    <connections>
+                        <outlet property="logTextView" destination="DIA-Yi-Tho" id="zXU-KV-ciq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T0n-e6-ib1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
