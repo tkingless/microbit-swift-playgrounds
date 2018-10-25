@@ -80,7 +80,7 @@ public class DartboardViewController: UIViewController, PlaygroundLiveViewSafeAr
                 connectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                     connectionView.topAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.topAnchor, constant: 12.0),
-                    connectionView.trailingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.layoutMarginsGuide.trailingAnchor, constant: 0.0),
+                    connectionView.trailingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.trailingAnchor, constant: 0.0),
                     connectionView.widthAnchor.constraint(greaterThanOrEqualToConstant: 270.0)
                     ])
             }
@@ -128,6 +128,34 @@ public class DartboardViewController: UIViewController, PlaygroundLiveViewSafeAr
                 btConnectionView.setName(microbitName, forPeripheral: peripheral)
             }
         }
+    }
+    
+    @IBAction func OnBtnLeftClicked (_ sender: Any){
+        //uartWriteData("L")
+        let cmd = "L."
+        self.btManager.microbit?.writeValue(cmd.microbitData,
+                                            forCharacteristicUUID: .uartRX,
+                                            handler:  {(characteristic, error) in
+                                                self.logMessage("Left written")
+        })
+    }
+    
+    @IBAction func OnBtnRightClicked (_ sender: Any){
+        let cmd = "R."
+        self.btManager.microbit?.writeValue(cmd.microbitData,
+                                            forCharacteristicUUID: .uartRX,
+                                            handler:  {(characteristic, error) in
+                                                self.logMessage("Right written")
+        })
+    }
+    
+    @IBAction func OnBtnDownClicked (_ sender: Any){
+        let cmd = "S."
+        self.btManager.microbit?.writeValue(cmd.microbitData,
+                                            forCharacteristicUUID: .uartRX,
+                                            handler:  {(characteristic, error) in
+                                                self.logMessage("Stop written")
+        })
     }
     
 }

@@ -29,6 +29,9 @@
                                             <constraint firstAttribute="width" secondItem="BLu-2x-Mh7" secondAttribute="height" multiplier="239:166" id="ImB-1L-mLR"/>
                                         </constraints>
                                         <state key="normal" image="leftBtn"/>
+                                        <connections>
+                                            <action selector="OnBtnLeftClicked:" destination="Jen-y8-4Cc" eventType="touchUpInside" id="ELd-Tu-WW1"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bs-0H-yP8" userLabel="btnRight">
                                         <rect key="frame" x="93" y="37.333333333333314" width="31.333333333333329" height="21.666666666666671"/>
@@ -36,6 +39,9 @@
                                             <constraint firstAttribute="width" secondItem="5Bs-0H-yP8" secondAttribute="height" multiplier="29:20" id="Rl7-aw-cXK"/>
                                         </constraints>
                                         <state key="normal" image="rightBtn"/>
+                                        <connections>
+                                            <action selector="OnBtnRightClicked:" destination="Jen-y8-4Cc" eventType="touchUpInside" id="Fb1-lV-Lz1"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hul-6K-Oop" userLabel="btnDown">
                                         <rect key="frame" x="69.666666666666671" y="50.666666666666629" width="24.666666666666671" height="25"/>
@@ -43,6 +49,9 @@
                                             <constraint firstAttribute="width" secondItem="hul-6K-Oop" secondAttribute="height" multiplier="211:213" id="QhU-eP-Dv1"/>
                                         </constraints>
                                         <state key="normal" image="downBtn"/>
+                                        <connections>
+                                            <action selector="OnBtnDownClicked:" destination="Jen-y8-4Cc" eventType="touchUpInside" id="aFd-1W-aym"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DIA-Yi-Tho" userLabel="logView">
                                         <rect key="frame" x="0.0" y="110.33333333333331" width="414" height="110.33333333333331"/>
