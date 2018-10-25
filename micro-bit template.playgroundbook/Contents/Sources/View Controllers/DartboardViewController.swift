@@ -79,8 +79,8 @@ public class DartboardViewController: UIViewController, PlaygroundLiveViewSafeAr
                 self.view.addSubview(connectionView)
                 connectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    connectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 12.0),
-                    connectionView.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: 0.0),
+                    connectionView.topAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.topAnchor, constant: 12.0),
+                    connectionView.trailingAnchor.constraint(equalTo: self.liveViewSafeAreaGuide.layoutMarginsGuide.trailingAnchor, constant: 0.0),
                     connectionView.widthAnchor.constraint(greaterThanOrEqualToConstant: 270.0)
                     ])
             }
@@ -126,6 +126,52 @@ public class DartboardViewController: UIViewController, PlaygroundLiveViewSafeAr
             // Ensure peripheral is renamed after pairing
             if let btConnectionView = bluetoothController.view as? PlaygroundBluetoothConnectionView {
                 btConnectionView.setName(microbitName, forPeripheral: peripheral)
+            }
+        }
+    }
+    
+}
+
+
+extension DartboardViewController : PlaygroundLiveViewMessageHandler {
+    
+    public func receive(_ message: PlaygroundValue) {
+        
+        if let actionType = message.actionType {
+            
+            let microbit = self.btManager.microbit
+            
+            switch actionType {
+                
+            case .readData:
+                guard let characteristicUUID = message.characteristicUUID else { return }
+                
+                microbit?.readValueForCharacteristic(characteristicUUID,
+                                                     handler: {(characteristic, error) in
+                                                        let returnedMessage = PlaygroundValue.fromActionType(actionType,
+                                                                                                             characteristicUUID: characteristicUUID,
+                                                                                                             data: characteristic.value)
+                                                        //liveViewController.logMessage("Received data: \(characteristic.value as! NSData)")
+                                                        self.send(returnedMessage)
+                })
+
+                
+            case .writeData:
+                guard let characteristicUUID = message.characteristicUUID else { return }
+                if let data = message.data {
+                    
+                    microbit?.writeValue(data,
+                                         forCharacteristicUUID: characteristicUUID,
+                                         handler: {(characteristic, error) in
+                                            let returnedMessage = PlaygroundValue.fromActionType(actionType,
+                                                                                                 characteristicUUID: characteristicUUID,
+                                                                                                 data: characteristic.value)
+                                            self.send(returnedMessage)
+                    })
+                }
+                
+            default:
+                break
             }
         }
     }
