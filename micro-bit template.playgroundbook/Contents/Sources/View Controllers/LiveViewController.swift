@@ -223,8 +223,8 @@ public class LiveViewController: UIViewController, BTManagerDelegate, LoggingPro
     
     public func logMessage(_ message: String) {
         
-        let string = self.logTextView.text + "\n" + message
-        self.logTextView.text = string
+        let string = (self.logTextView?.text ?? "") + "\n" + message
+        self.logTextView?.text = string
     }
     
     public func btManagerStateDidChange(_ manager: BTManager) {
